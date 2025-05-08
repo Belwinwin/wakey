@@ -45,3 +45,18 @@ CREATE TABLE IF NOT EXISTS vehicles (
     FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
+CREATE TABLE `vehicle_assignments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `vehicle_id` int NOT NULL,
+  `driver_id` int NOT NULL,
+  `owner_id` int NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `vehicle_id` (`vehicle_id`),
+  KEY `driver_id` (`driver_id`),
+  KEY `owner_id` (`owner_id`),
+  CONSTRAINT `vehicle_assignments_ibfk_1` FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vehicle_assignments_ibfk_2` FOREIGN KEY (`driver_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `vehicle_assignments_ibfk_3` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ;
